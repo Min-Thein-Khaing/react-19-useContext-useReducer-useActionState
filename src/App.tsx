@@ -1,29 +1,64 @@
-import { useLanguage } from "./provider/LanguagesContext"
+import React, { useReducer } from 'react'
 
-const translation :Record<string,string> = {
-  en: "React 19 Context API",
-  mm: "မြန်မာဘာသာ",
-  jp: "日本語",
-  ch: "中文",
+type FormState = {
+  name: string,
+  city: string,
+  country: string
+}
+type FormAction = {
+  type:"UPDATE_FIELD",
+  field:keyof FormState,
+  value:string
+} | {
+  type:"RESET"
+}
+const initialState = {
+  name: "",
+  city: "",
+  country: ""
+}
+
+const reducer = (state: FormState, action: FormAction) => {
+  switch (action.type) {
+    case "UPDATE_FIELD":
+      return {
+        ...state,
+        [action.field]:action.value
+      }
+    case "RESET":
+      return initialState
+    default:
+      return state
+}
 }
 
 const App = () => {
-const {languages,changeLanugages} = useLanguage()
+  const [state, dispatch] = useReducer(reducer, initialState )
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log("submit",state)
+    dispatch({type:"RESET"})
+  }
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name,value} = e.target
+    dispatch({type:"UPDATE_FIELD",field:name as keyof FormState,value})
+  }
   return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>React 19 Context API</h1>
-
-    <select value={languages} onChange={(e) => changeLanugages(e.target.value)}>
-      <option value="en">English</option>
-      <option value="mm">Myanmar</option>
-      <option value="jp">Japan</option>
-      <option value="ch">China</option>
-    </select>
-
-      <p>Current Language: <span>{translation[languages]}</span></p>
-      
-      
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">Name</label>
+        <input value={state.name} name='name' onChange={(e) => handleOnChange(e)} type="text" id="name" />
+      </div>
+      <div>
+        <label htmlFor="city">City</label>
+        <input value={state.city} name='city' onChange={(e) => handleOnChange(e)} type="text" id="city" />
+      </div>
+      <div>
+        <label htmlFor="country">Country</label>
+        <input value={state.country} name='country' onChange={(e) => handleOnChange(e)} type="text" id="country" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   )
 }
 
