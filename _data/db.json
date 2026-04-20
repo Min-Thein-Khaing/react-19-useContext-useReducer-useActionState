@@ -1,0 +1,45 @@
+{
+  "posts": [
+    {
+      "title": "hello7",
+      "vote": 0,
+      "id": "bv5EEuo0DrE"
+    },
+    {
+      "title": "ddsf",
+      "vote": 8,
+      "id": "pTscumSKAO4"
+    },
+    {
+      "title": "sdfdsfds",
+      "vote": 3,
+      "id": "cp433dloiTc"
+    },
+    {
+      "title": "ddsfdsf",
+      "vote": 0,
+      "id": "Y1yl_2Jfu_M"
+    },
+    {
+      "title": "sdfdfdsf",
+      "vote": 0,
+      "id": "cztvxAquyHY"
+    },
+    {
+      "title": "gfgfdg",
+      "vote": 1,
+      "id": "xMKUJo5ibR4"
+    },
+    {
+      "title": "dfgfdgdfgf",
+      "vote": 5,
+      "id": "lh88-wv6DDc"
+    },
+    {
+      "title": "sfdsfdsf",
+      "vote": 8,
+      "id": "V0Y_47XskmQ"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
